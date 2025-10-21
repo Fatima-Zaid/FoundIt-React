@@ -42,8 +42,8 @@ const App = () => {
               comments={post.comments || []}
               setComments={(updatedComments) =>
                 setPosts((prevPosts) =>
-                  prevPosts.map((c) =>
-                    c._id === post._id ? { ...c, comments: updatedComments } : p
+                  prevPosts.map((p) =>
+                    p._id === post._id ? { ...p, comments: updatedComments } : p
                   )
                 )
               }
