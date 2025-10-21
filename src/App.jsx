@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Post from "./components/Post"
 import "./App.css"
 import Comment from "./components/Comment"
 
 const App = () => {
   const [posts, setPosts] = useState([])
 
-  
+
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts")
+        let response = await axios.get("http://localhost:3000/posts")
         setPosts(response.data)
       } catch (error) {
         console.error("Error fetching posts:", error)
@@ -21,7 +22,20 @@ const App = () => {
 
   return (
     <>
-      <h1>Lost items:</h1>
+  <Post posts={posts} setPosts={setPosts}/>
+  <h1>Lost items:</h1>
+  {
+    posts?.map((post)=>(
+      <div key={post._id} className="post">
+        <h3>Title: {post.title}</h3>
+        <img src={post.img} alt="" />
+        <h5>Description: {post.description}</h5>
+        <h5>Date: {post.date}</h5>
+        <h5>Time: {post.time}</h5>
+
+      </div>
+    ))
+  }      <h1>Lost items:</h1>
 
       {posts?.length === 0 ? (
         <p>No posts available.</p>
