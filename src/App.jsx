@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import "./App.css"
+import Comment from "./components/Comment"
 
 const App = () => {
   const [posts, setPosts] = useState([])
