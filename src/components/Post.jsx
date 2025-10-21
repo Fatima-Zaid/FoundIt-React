@@ -39,17 +39,17 @@ const Post = ({ posts, setPosts }) => {
         value={postState.username}
       />
 
-      <label htmlFor="postTitle">Title:</label>
+      <label htmlFor="title">Title:</label>
       <input
         type="text"
-        name="postTitle"
+        name="title"
         onChange={handleChange}
         value={postState.title}
       />
 
       <label htmlFor="image">Upload Image:</label>
       <input
-        type="text"
+        type="file"
         name="image"
         onChange={handleChange}
         value={postState.image}
@@ -71,7 +71,7 @@ const Post = ({ posts, setPosts }) => {
         value={postState.date}
       />
 
-      <label htmlFor="date">Date:</label>
+      <label htmlFor="time">Time:</label>
       <input
         type="time"
         name="time"
