@@ -7,12 +7,11 @@ import Comment from "./components/Comment"
 const App = () => {
   const [posts, setPosts] = useState([])
 
-  
   useEffect(() => {
     const getPosts = async () => {
       try {
         const response = await axios.get("http://localhost:3000/posts")
-    
+
         setPosts(response.data)
       } catch (error) {
         console.error("Error fetching posts:", error)
@@ -23,7 +22,7 @@ const App = () => {
 
   return (
     <>
-    <Post posts={posts} setPosts={setPosts}/>
+      <Post posts={posts} setPosts={setPosts} />
       <h1>Lost items:</h1>
 
       {posts?.length === 0 ? (
@@ -32,11 +31,13 @@ const App = () => {
         posts.map((post) => (
           <div key={post._id} className="post-card">
             <h3>Title: {post.title}</h3>
-            {post.img && <img src={post.img} alt={post.title} />}
+            <img
+              src={`http://localhost:3000/${post.image}`}
+              alt={post.title}
+            />{" "}
             <h5>Description: {post.description}</h5>
             <h5>Date: {post.date}</h5>
             <h5>Time: {post.time}</h5>
-
             <Comment
               postId={post._id}
               comments={post.comments || []}

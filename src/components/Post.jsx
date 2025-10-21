@@ -12,21 +12,56 @@ const Post = ({ posts, setPosts }) => {
   }
 
   const [postState, setPostState] = useState(initialState)
+  const [imageFile, setImageFile] = useState(null)
 
   const handleChange = (event) => {
     setPostState({ ...postState, [event.target.name]: event.target.value })
   }
 
+  const handleFileChange = (event) => {
+    setImageFile(event.target.files[0])
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const response = await axios.post(
-      "http://localhost:3000/posts/createPost",
-      postState
-    )
-    let postsList = [...posts]
-    postsList.push(response.data)
-    setPosts(postsList)
-    setPostState(initialState)
+
+    const formData = new FormData()
+
+    Object.entries(postState).forEach(([key, value]) => {
+      formData.append(key, value)
+    })
+
+    // Append file
+    if (imageFile) {
+      formData.append("image", imageFile)
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/posts/createPost",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      )
+
+      let postsList = [...posts]
+      postsList.push(response.data)
+      setPosts(postsList)
+      setPostState(initialState)
+      setImageFile(null)
+    } catch (error) {
+      console.error("Error creating post:", error)
+    }
+
+    // const response = await axios.post(
+    //   "http://localhost:3000/posts/createPost",
+    //   postState
+    // )
+    // let postsList = [...posts]
+    // postsList.push(response.data)
+    // setPosts(postsList)
+    // setPostState(initialState)
   }
 
   return (
@@ -39,20 +74,20 @@ const Post = ({ posts, setPosts }) => {
         value={postState.username}
       />
 
-      <label htmlFor="postTitle">Title:</label>
+      <label htmlFor="title">Title:</label>
       <input
         type="text"
-        name="postTitle"
+        name="title"
         onChange={handleChange}
         value={postState.title}
       />
 
       <label htmlFor="image">Upload Image:</label>
       <input
-        type="text"
+        type="file"
         name="image"
-        onChange={handleChange}
-        value={postState.image}
+        onChange={handleFileChange}
+        accept="image/*"
       />
 
       <label htmlFor="description">Description:</label>
@@ -71,7 +106,7 @@ const Post = ({ posts, setPosts }) => {
         value={postState.date}
       />
 
-      <label htmlFor="date">Date:</label>
+      <label htmlFor="time">Time:</label>
       <input
         type="time"
         name="time"
