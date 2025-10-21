@@ -30,12 +30,27 @@ const Post = ({posts,setPosts}) => {
   return(
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username:</label>
+      <input type="text" name={username} onChange={handleChange} value={postState.username}/>
 
 
       <label htmlFor="postTitle">Title:</label>
       <input type="text" name="postTitle" onChange={handleChange} value={postState.title} />
 
 
+      <label htmlFor="image">Upload Image:</label>
+      <input type="text" name="image" onChange={handleChange} value={postState.image} />
+
+
+      <label htmlFor="description">Description:</label>
+      <input type="text" name="description" onChange={handleChange} value={postState.description} />
+
+
+      <label htmlFor="date">Date:</label>
+      <input type="date" name="date" onChange={handleChange} value={postState.date} />
+
+
+      <label htmlFor="date">Date:</label>
+      <input type="time" name="time" onChange={handleChange} value={postState.time} />
 
     </form>
   )
