@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-const Post = ({posts,setPosts}) => {
+const Post = ({ posts, setPosts }) => {
   const initialState = {
     username: "",
     title: "",
@@ -13,48 +13,75 @@ const Post = ({posts,setPosts}) => {
 
   const [postState, setPostState] = useState(initialState)
 
-  const handleChange = (event)=>{
-    setPostState({...postState,[event.target.name]: event.target.value})
+  const handleChange = (event) => {
+    setPostState({ ...postState, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event)=>{
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const response = await axios.post("http://localhost:3000/posts/createPost",postState)
+    const response = await axios.post(
+      "http://localhost:3000/posts/createPost",
+      postState
+    )
     let postsList = [...posts]
     postsList.push(response.data)
     setPosts(postsList)
     setPostState(initialState)
   }
 
-
-  return(
+  return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username:</label>
-      <input type="text" name={username} onChange={handleChange} value={postState.username}/>
-
+      <input
+        type="text"
+        name="username"
+        onChange={handleChange}
+        value={postState.username}
+      />
 
       <label htmlFor="postTitle">Title:</label>
-      <input type="text" name="postTitle" onChange={handleChange} value={postState.title} />
-
+      <input
+        type="text"
+        name="postTitle"
+        onChange={handleChange}
+        value={postState.title}
+      />
 
       <label htmlFor="image">Upload Image:</label>
-      <input type="text" name="image" onChange={handleChange} value={postState.image} />
-
+      <input
+        type="text"
+        name="image"
+        onChange={handleChange}
+        value={postState.image}
+      />
 
       <label htmlFor="description">Description:</label>
-      <input type="text" name="description" onChange={handleChange} value={postState.description} />
-
+      <input
+        type="text"
+        name="description"
+        onChange={handleChange}
+        value={postState.description}
+      />
 
       <label htmlFor="date">Date:</label>
-      <input type="date" name="date" onChange={handleChange} value={postState.date} />
-
+      <input
+        type="date"
+        name="date"
+        onChange={handleChange}
+        value={postState.date}
+      />
 
       <label htmlFor="date">Date:</label>
-      <input type="time" name="time" onChange={handleChange} value={postState.time} />
+      <input
+        type="time"
+        name="time"
+        onChange={handleChange}
+        value={postState.time}
+      />
 
+      <button>Submit</button>
     </form>
   )
-
 }
 
 export default Post

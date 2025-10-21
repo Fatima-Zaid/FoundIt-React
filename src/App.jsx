@@ -23,7 +23,7 @@ const App = () => {
   <h1>Lost items:</h1>
   {
     posts?.map((post)=>(
-      <div key={post._id}>
+      <div key={post._id} className="post">
         <h3>Title: {post.title}</h3>
         <img src={post.img} alt="" />
         <h5>Description: {post.description}</h5>
