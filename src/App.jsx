@@ -7,6 +7,7 @@ import Comment from "./components/Comment"
 const App = () => {
   const [posts, setPosts] = useState([])
 
+
   useEffect(() => {
     const getPosts = async () => {
       try {
