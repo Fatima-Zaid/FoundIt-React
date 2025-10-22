@@ -265,9 +265,9 @@ form {
 
 /* Comment Section Styling */
 .commentList {
-  width: 100%;
+  width: 520px;
   margin-top: 25px;
-  padding-left: 10px;
+  padding: 15px;
   background: rgb(235, 231, 231);
   border-radius: 20px;
   border: 3px solid #ffd700;
@@ -324,7 +324,7 @@ form {
 
 /* Comment Form Styling */
 .post-card form {
-  width: 100%;
+  width: 500px;
   margin-top: 20px;
   padding: 25px;
   background: rgb(235, 231, 231);

@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts")
+        const response = await axios.get(" https://foundit-3.onrender.com/posts")
         setPosts(response.data)
       } catch (error) {
         console.error("Error fetching posts:", error)
@@ -31,7 +31,7 @@ const App = () => {
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`http://localhost:3000/posts/${postId}`)
+      await axios.delete(` https://foundit-3.onrender.com/posts/${postId}`)
       setPosts(posts.filter((post) => post._id !== postId))
     } catch (error) {
       console.error("Error deleting post:", error)
@@ -73,7 +73,7 @@ const App = () => {
                 <div key={post._id} className="post-card">
                   <h3>Title: {post.title}</h3>
                   <img
-                    src={`http://localhost:3000/${post.image}`}
+                    src={` https://foundit-3.onrender.com/${post.image}`}
                     alt={post.title}
                   />
                   <h5>Description: {post.description}</h5>

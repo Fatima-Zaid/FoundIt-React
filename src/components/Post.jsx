@@ -37,7 +37,7 @@ const Post = ({ posts, setPosts }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/posts/createPost",
+        " https://foundit-3.onrender.com/posts/createPost",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
