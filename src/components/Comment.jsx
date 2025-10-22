@@ -17,7 +17,7 @@ const Comment = ({ comments, setComments, postId }) => {
     e.preventDefault()
     try {
       const response = await axios.post(
-        `http://localhost:3000/comments/${postId}`,
+        ` https://foundit-3.onrender.com/comments/${postId}`,
         formState
       )
 
@@ -30,7 +30,7 @@ const Comment = ({ comments, setComments, postId }) => {
 
   const handleDelete = async (commentId) => {
     try {
-      await axios.delete(`http://localhost:3000/comments/${commentId}`)
+      await axios.delete(` https://foundit-3.onrender.com/comments/${commentId}`)
       setComments(comments.filter((comment) => comment._id !== commentId))
     } catch (error) {
       console.error("Error deleting comment:", error)
