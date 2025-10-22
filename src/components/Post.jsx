@@ -57,7 +57,7 @@ const Post = ({ posts, setPosts }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="formPost">
       <label htmlFor="username">Username:</label>
       <input
         type="text"

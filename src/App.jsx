@@ -7,7 +7,6 @@ import Comment from "./components/Comment"
 const App = () => {
   const [posts, setPosts] = useState([])
 
-
   useEffect(() => {
     const getPosts = async () => {
       try {
@@ -21,10 +20,10 @@ const App = () => {
     getPosts()
   }, [])
 
-    const handleDelete = async (postId)=>{
+  const handleDelete = async (postId) => {
     try {
       await axios.delete(`http://localhost:3000/posts/${postId}`)
-      setPosts(posts.filter((post)=>(post._id !== postId)))
+      setPosts(posts.filter((post) => post._id !== postId))
     } catch (error) {
       console.error("Error deleting post:", error)
     }
@@ -32,37 +31,51 @@ const App = () => {
 
   return (
     <>
-      <Post posts={posts} setPosts={setPosts} />
-      <h1>Lost items:</h1>
+      <div className="title">
+        <h1>Found It!</h1>
+      </div>
+      <section className="section">
+        <div className="form">
+          <Post posts={posts} setPosts={setPosts} />
+        </div>
 
-      {posts?.length === 0 ? (
-        <p>No posts available.</p>
-      ) : (
-        posts.map((post) => (
-          <div key={post._id} className="post-card">
-            <h3>Title: {post.title}</h3>
-            <img
-              src={`http://localhost:3000/${post.image}`}
-              alt={post.title}
-            />{" "}
-            <h5>Description: {post.description}</h5>
-            <h5>Date: {post.date}</h5>
-            <h5>Time: {post.time}</h5>
-            <button onClick={()=> handleDelete(post._id)}>Delete Post</button>
-            <Comment
-              postId={post._id}
-              comments={post.comments || []}
-              setComments={(updatedComments) =>
-                setPosts((prevPosts) =>
-                  prevPosts.map((p) =>
-                    p._id === post._id ? { ...p, comments: updatedComments } : p
-                  )
-                )
-              }
-            />
-          </div>
-        ))
-      )}
+        <div className="list">
+          <h1>Lost items:</h1>
+
+          {posts?.length === 0 ? (
+            <p>No posts available.</p>
+          ) : (
+            posts.map((post) => (
+              <div key={post._id} className="post-card">
+                <h3>Title: {post.title}</h3>
+                <img
+                  src={`http://localhost:3000/${post.image}`}
+                  alt={post.title}
+                />{" "}
+                <h5>Description: {post.description}</h5>
+                <h5>Date: {post.date}</h5>
+                <h5>Time: {post.time}</h5>
+                <button onClick={() => handleDelete(post._id)}>
+                  Delete Post
+                </button>
+                <Comment
+                  postId={post._id}
+                  comments={post.comments || []}
+                  setComments={(updatedComments) =>
+                    setPosts((prevPosts) =>
+                      prevPosts.map((p) =>
+                        p._id === post._id
+                          ? { ...p, comments: updatedComments }
+                          : p
+                      )
+                    )
+                  }
+                />
+              </div>
+            ))
+          )}
+        </div>
+      </section>
     </>
   )
 }
