@@ -20,6 +20,15 @@ const App = () => {
     getPosts()
   }, [])
 
+    const handleDelete = async (postId)=>{
+    try {
+      await axios.delete(`http://localhost:3000/posts/${postId}`)
+      setPosts(posts.filter((post)=>(post._id !== postId)))
+    } catch (error) {
+      console.error("Error deleting post:", error)
+    }
+  }
+
   return (
     <>
       <Post posts={posts} setPosts={setPosts} />
@@ -38,6 +47,7 @@ const App = () => {
             <h5>Description: {post.description}</h5>
             <h5>Date: {post.date}</h5>
             <h5>Time: {post.time}</h5>
+            <button onClick={()=> handleDelete(post._id)}>Delete Post</button>
             <Comment
               postId={post._id}
               comments={post.comments || []}

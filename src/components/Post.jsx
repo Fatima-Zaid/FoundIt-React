@@ -5,7 +5,6 @@ const Post = ({ posts, setPosts }) => {
   const initialState = {
     username: "",
     title: "",
-    image: "",
     description: "",
     date: "",
     time: "",
@@ -53,16 +52,9 @@ const Post = ({ posts, setPosts }) => {
     } catch (error) {
       console.error("Error creating post:", error)
     }
-
-    // const response = await axios.post(
-    //   "http://localhost:3000/posts/createPost",
-    //   postState
-    // )
-    // let postsList = [...posts]
-    // postsList.push(response.data)
-    // setPosts(postsList)
-    // setPostState(initialState)
   }
+
+
 
   return (
     <form onSubmit={handleSubmit}>
